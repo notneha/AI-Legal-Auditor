@@ -1,0 +1,19 @@
+# --- Core AI & LLM ---
+langchain-google-genai>=4.2.0
+google-generativeai>=0.8.0
+langchain>=1.1.0
+
+# --- Vector Database & Embeddings ---
+langchain-chroma>=1.1.0
+langchain-huggingface>=0.1.0
+sentence-transformers>=3.0.0
+chromadb>=0.5.0
+
+# --- Document Processing & Utilities ---
+langchain-text-splitters>=0.3.11
+pypdf>=4.0.0
+python-dotenv>=1.2.0
+
+# --- Performance & Optimization ---
+transformers>=4.40.0
+torch>=2.2.0
