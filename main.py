@@ -22,6 +22,11 @@ from langchain_classic.retrievers import ParentDocumentRetriever
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
+try:
+    from markdown_pdf import MarkdownPdf, Section
+except ImportError:
+    print("Please install markdown-pdf: pip install markdown-pdf")
+
 if not GOOGLE_API_KEY:
     raise ValueError("Error: GOOGLE_API_KEY not found in .env file!")
 
@@ -106,6 +111,17 @@ def final_clean_text(text):
     
     return text.strip()
 
+def save_report_as_pdf(markdown_content, filename):
+    """Converts Markdown to a professional PDF with basic CSS styling."""
+    try:
+        pdf = MarkdownPdf(toc_level=2)
+        custom_css = "table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; font-family: sans-serif; }"
+        pdf.add_section(Section(markdown_content), user_css=custom_css)
+        pdf.save(filename)
+        print(f"📄 PDF Report saved: {filename}")
+    except Exception as e:
+        print(f"⚠️ PDF generation failed: {e}")
+
 # The RAG Chain
 chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()}
@@ -129,7 +145,8 @@ if __name__ == "__main__":
 
         # Create unique timestamped filename
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_filename = f"Audit_Report_{base_filename}_{timestamp}.md"
+        md_filename = f"Audit_{base_filename}_{timestamp}.md"
+        pdf_filename = f"Audit_{base_filename}_{timestamp}.pdf"
 
         # Run the AI Audit
         response = chain.invoke(query)
@@ -150,11 +167,16 @@ if __name__ == "__main__":
         # Print to console
         print("\n" + full_report)
         
+        
         # SAVE TO FILE
-        with open(output_filename, "w", encoding="utf-8") as f:
+        # 2. Save as Markdown
+        with open(md_filename, "w", encoding="utf-8") as f:
             f.write(full_report)
-            
-        print(f"\n Success! Professional audit saved to: {output_filename}")
+        print(f"Markdown Report saved: {md_filename}")
+        
+        # 3. Save as PDF
+        save_report_as_pdf(full_report, pdf_filename)
+        print(f"\n Success! Professional audit saved to: {pdf_filename}")
         
     except Exception as e:
         print(f" An error occurred during the audit: {e}")
