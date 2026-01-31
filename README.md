@@ -32,6 +32,9 @@ This project fulfills the core requirements of the January 2026 Home Programming
 ## 🧠 Statement of Contribution
 My primary contribution to the RAG algorithm involves the custom integration of Parent Document Retrieval (PDR). Unlike standard RAG which retrieves isolated snippets, this architecture maps small "Child Chunks" (used for efficient searching) back to their "Parent" paragraphs. This ensures the LLM receives the complete surrounding context of a legal clause, drastically reducing the risk of misinterpretation.
 
+## 📜 PDF Export 
+Automatically generates formatted PDF reports with professional CSS styling for risk tables.
+
 ## 🛡️ Hallucination Monitoring
 -To ensure reliability in a legal setting:
 -Deterministic Sampling: Set temperature=0 to eliminate creative variance.
