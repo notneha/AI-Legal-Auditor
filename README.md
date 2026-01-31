@@ -56,18 +56,16 @@ pip install -r requirements.txt
 3. Set up environment
 Create a .env file in the root directory and add your Google API Key:
 
-Code snippet
-
 GOOGLE_API_KEY=your_actual_key_here
+
 4. Run the Pipeline
 First, ingest the contracts into the vector store:
 
-Bash
+Run
 
 python ingest.py
-Then, execute the audit:
 
-Bash
+Then, execute the audit:
 
 python main.py
 
