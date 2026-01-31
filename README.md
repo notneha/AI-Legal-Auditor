@@ -29,19 +29,16 @@ This project fulfills the core requirements of the January 2026 Home Programming
 - **Embeddings:** HuggingFace `all-MiniLM-L6-v2`
 - **Framework:** LangChain (ParentDocumentRetriever, RecursiveCharacterTextSplitter)
 
-##🧠 Statement of Contribution
+## 🧠 Statement of Contribution
 My primary contribution to the RAG algorithm involves the custom integration of Parent Document Retrieval (PDR). Unlike standard RAG which retrieves isolated snippets, this architecture maps small "Child Chunks" (used for efficient searching) back to their "Parent" paragraphs. This ensures the LLM receives the complete surrounding context of a legal clause, drastically reducing the risk of misinterpretation.
 
-🛡️ Hallucination Monitoring
+## 🛡️ Hallucination Monitoring
 -To ensure reliability in a legal setting:
-
 -Deterministic Sampling: Set temperature=0 to eliminate creative variance.
-
 -Grounding: The system is strictly instructed to return an "I don't know" response if a clause is missing.
-
 -Citations: Every audit identifies the exact section number where information was found.
 
-##Prepared by: Syeda Neha Zafar
+## Prepared by: Syeda Neha Zafar
 
 
 
