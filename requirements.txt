@@ -13,7 +13,9 @@ chromadb>=0.5.0
 langchain-text-splitters>=0.3.11
 pypdf>=4.0.0
 python-dotenv>=1.2.0
+markdown-pdf>=1.1.0
 
 # --- Performance & Optimization ---
 transformers>=4.40.0
+
 torch>=2.2.0
